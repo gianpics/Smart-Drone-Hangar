@@ -1,0 +1,35 @@
+package esiot.drone_remote_unit;
+
+import java.util.Date;
+
+import javax.swing.*;
+
+class LogView extends JFrame  {
+
+	private JTextArea log;
+
+	public LogView(){
+		super("Log ");
+		setSize(520,420);
+		this.setResizable(false);
+		JPanel mainPanel = new JPanel();
+		log = new JTextArea(20,40);
+		log.setEditable(false);
+		JScrollPane scrol = new JScrollPane(log);
+		mainPanel.add(scrol);
+		this.getContentPane().add(mainPanel);
+	}
+	
+	public void log(String msg){
+		SwingUtilities.invokeLater(() -> {
+			String date = new Date().toString();
+			log.append("["+date+"] "+ msg +"\n");
+		});
+	}
+	
+	public void display() {
+		SwingUtilities.invokeLater(() -> {
+			this.setVisible(true);
+		});
+	}
+}
